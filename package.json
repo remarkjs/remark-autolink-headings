@@ -1,6 +1,6 @@
 {
   "name": "mdast-autolink-headings",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Automatically add links to headings in Markdown.",
   "main": "dist/index.js",
   "files": [
