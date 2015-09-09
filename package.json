@@ -1,0 +1,42 @@
+{
+  "name": "mdast-autolink-headings",
+  "version": "0.0.0",
+  "description": "Automatically add links to headings in Markdown.",
+  "main": "dist/index.js",
+  "files": [
+    "LICENSE-MIT",
+    "dist"
+  ],
+  "scripts": {
+    "prepublish": "babel src --out-dir dist --ignore /__tests__/",
+    "test": "babel-tape-runner \"src/**/__tests__/*.js\" | tap-spec"
+  },
+  "keywords": [
+    "headings",
+    "link",
+    "automatic",
+    "markdown",
+    "mdast"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "babel": "^5.8.23",
+    "babel-tape-runner": "^1.2.0",
+    "mdast": "^1.2.0",
+    "mdast-html": "^1.1.0",
+    "mdast-slug": "^2.0.0",
+    "tap-spec": "^2.2.2",
+    "tape": "^3.5.0"
+  },
+  "homepage": "https://github.com/ben-eb/mdast-autolink-headings",
+  "author": {
+    "name": "Ben Briggs",
+    "email": "beneb.info@gmail.com",
+    "url": "http://beneb.info"
+  },
+  "repository": "ben-eb/mdast-autolink-headings",
+  "dependencies": {
+    "object-assign": "^4.0.1",
+    "unist-util-visit": "^1.0.0"
+  }
+}
