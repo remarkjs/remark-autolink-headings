@@ -19,7 +19,7 @@ remark-autolink-headings is designed to work with
 each of your headings:
 
 ```js
-var remark    = require('remark');
+var remark   = require('remark');
 var html     = require('remark-html');
 var slug     = require('remark-slug');
 var headings = require('remark-autolink-headings');
