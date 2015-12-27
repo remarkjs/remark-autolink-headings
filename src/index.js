@@ -1,5 +1,3 @@
-'use strict';
-
 import assign from 'object-assign';
 import visit from 'unist-util-visit';
 
@@ -21,8 +19,8 @@ export default function attacher (mdast, opts = {}) {
     let behaviour = opts.behaviour;
 
     let methodMap = {
-        'prepend': 'unshift',
-        'append': 'push'
+        prepend: 'unshift',
+        append: 'push'
     };
 
     function inject (node) {

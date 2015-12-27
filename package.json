@@ -1,5 +1,5 @@
 {
-  "name": "mdast-autolink-headings",
+  "name": "remark-autolink-headings",
   "version": "1.0.0",
   "description": "Automatically add links to headings in Markdown.",
   "main": "dist/index.js",
@@ -8,25 +8,32 @@
     "dist"
   ],
   "scripts": {
-    "prepublish": "babel src --out-dir dist --ignore /__tests__/",
-    "test": "babel-tape-runner \"src/**/__tests__/*.js\" | tap-spec"
+    "copy-fixtures": "ncp src/__tests__/fixtures dist/__tests__/fixtures",
+    "lint": "eslint src",
+    "prepublish": "de dist && babel src --out-dir dist --ignore /__tests__/",
+    "test": "npm run lint && babel src --out-dir dist && npm run copy-fixtures && ava dist/__tests__"
   },
   "keywords": [
     "headings",
     "link",
     "automatic",
     "markdown",
-    "mdast"
+    "remark"
   ],
   "license": "MIT",
   "devDependencies": {
-    "babel": "^5.8.23",
-    "babel-tape-runner": "^1.2.0",
-    "mdast": "^1.2.0",
-    "mdast-html": "^1.1.0",
-    "mdast-slug": "^2.0.0",
-    "tap-spec": "^2.2.2",
-    "tape": "^3.5.0"
+    "ava": "sindresorhus/ava#945dbea40a6a500a24d54ebcc7e10dcd75647fc7",
+    "babel-cli": "^6.3.17",
+    "babel-core": "^6.3.26",
+    "babel-plugin-add-module-exports": "^0.1.2",
+    "babel-preset-es2015-loose": "^6.1.4",
+    "babel-preset-stage-0": "^6.3.13",
+    "del-cli": "^0.1.2",
+    "eslint": "^1.10.3",
+    "ncp": "^2.0.0",
+    "remark": "^3.0.0",
+    "remark-html": "^2.0.0",
+    "remark-slug": "^3.0.0"
   },
   "homepage": "https://github.com/ben-eb/mdast-autolink-headings",
   "author": {
