@@ -34,7 +34,7 @@
     "ncp": "^2.0.0",
     "remark": "^3.0.0",
     "remark-html": "^2.0.0",
-    "remark-slug": "^3.0.0"
+    "remark-slug": "^4.0.0"
   },
   "homepage": "https://github.com/ben-eb/mdast-autolink-headings",
   "author": {
