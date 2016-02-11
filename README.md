@@ -31,6 +31,8 @@ console.log(result);
 //=> <h1 id="hello"><a href="#hello" aria-hidden="true"><span class="icon icon-link"></span></a>Hello</h1>
 ```
 
+*Note that this module **must** be included after remark-slug.*
+
 
 ## API
 
