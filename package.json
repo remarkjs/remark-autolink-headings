@@ -32,7 +32,7 @@
     "del-cli": "^0.2.0",
     "eslint": "^1.10.3",
     "ncp": "^2.0.0",
-    "remark": "^3.0.0",
+    "remark": "^4.0.0",
     "remark-html": "^2.0.0",
     "remark-slug": "^4.0.0"
   },
