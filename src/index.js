@@ -10,7 +10,7 @@ let base = (node, callback) => {
     return callback('#' + data.htmlAttributes.id);
 };
 
-export default function attacher (mdast, opts = {}) {
+export default function attacher (remark, opts = {}) {
     opts = assign({
         behaviour: 'prepend',
         template: '<span class="icon icon-link"></span>'
@@ -27,7 +27,7 @@ export default function attacher (mdast, opts = {}) {
         return base(node, id => {
             node.children[methodMap[behaviour]]({
                 type: 'link',
-                href: id,
+                url: id,
                 title: null,
                 children: [],
                 data: {
@@ -44,7 +44,7 @@ export default function attacher (mdast, opts = {}) {
 
             node.children = [{
                 type: 'link',
-                href: id,
+                url: id,
                 title: null,
                 children: children,
                 data: {
