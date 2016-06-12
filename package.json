@@ -31,7 +31,7 @@
     "del-cli": "^0.2.0",
     "eslint": "^2.1.0",
     "eslint-config-cssnano": "^2.0.0",
-    "remark": "^4.1.0",
+    "remark": "^5.0.0",
     "remark-html": "^3.0.0",
     "remark-slug": "^4.1.0"
   },
