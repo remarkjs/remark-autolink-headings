@@ -25,7 +25,7 @@ var slug     = require('remark-slug');
 var headings = require('remark-autolink-headings');
 
 var markdown = '# Hello';
-var result   = remark.use([ slug, headings, html ]).process(markdown);
+var result   = remark().use([ slug, headings, html ]).process(markdown);
 console.log(result);
 
 //=> <h1 id="hello"><a href="#hello" aria-hidden="true"><span class="icon icon-link"></span></a>Hello</h1>
