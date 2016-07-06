@@ -13,14 +13,14 @@ let base = (node, callback) => {
 export default function attacher (remark, opts = {}) {
     opts = assign({
         behaviour: 'prepend',
-        template: '<span class="icon icon-link"></span>'
+        template: '<span class="icon icon-link"></span>',
     }, opts);
 
     let behaviour = opts.behaviour;
 
     let methodMap = {
         prepend: 'unshift',
-        append: 'push'
+        append: 'push',
     };
 
     function inject (node) {
@@ -32,8 +32,8 @@ export default function attacher (remark, opts = {}) {
                 children: [],
                 data: {
                     htmlContent: opts.template,
-                    htmlAttributes: opts.attributes || {'aria-hidden': true}
-                }
+                    htmlAttributes: opts.attributes || {'aria-hidden': true},
+                },
             });
         });
     }
@@ -48,8 +48,8 @@ export default function attacher (remark, opts = {}) {
                 title: null,
                 children: children,
                 data: {
-                    htmlAttributes: opts.attributes
-                }
+                    htmlAttributes: opts.attributes,
+                },
             }];
         });
     }

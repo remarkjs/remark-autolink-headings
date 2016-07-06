@@ -1,10 +1,10 @@
+import {readFileSync as read} from 'fs';
+import {join} from 'path';
 import test from 'ava';
-import headings from '../';
 import remark from 'remark';
 import slug from 'remark-slug';
 import html from 'remark-html';
-import {readFileSync as read} from 'fs';
-import {join} from 'path';
+import headings from '../';
 
 let base = file => read(join(__dirname, 'fixtures', file), 'utf-8');
 
