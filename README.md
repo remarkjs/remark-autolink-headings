@@ -47,7 +47,7 @@ Default: `prepend`
 
 Set this to `prepend` to inject the link before the heading text; `append` after
 it, and `wrap` to wrap the whole heading text with the link. Note that supplying
-`wrap` will ignore any value defined by the `template` option.
+`wrap` will ignore any value defined by the `content` option.
 
 ##### content
 
