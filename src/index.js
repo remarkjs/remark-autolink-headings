@@ -1,8 +1,16 @@
-import assign from 'object-assign';
 import visit from 'unist-util-visit';
 
-let base = (node, callback) => {
-    let data = node.data || {};
+const icon = 'icon';
+const link = 'link';
+const wrap = 'wrap';
+
+const methodMap = {
+    prepend: 'unshift',
+    append: 'push',
+};
+
+const base = (node, callback) => {
+    const {data} = node;
     if (!data || !data.htmlAttributes || !data.htmlAttributes.id) {
         return;
     }
@@ -10,49 +18,55 @@ let base = (node, callback) => {
     return callback('#' + data.htmlAttributes.id);
 };
 
+const contentDefaults = {
+    type: 'element',
+    tagName: 'span',
+    properties: {className: [icon, `${icon}-${link}`]},
+};
+
 export default function attacher (remark, opts = {}) {
-    opts = assign({
+    let {linkProperties, behaviour, content} = {
         behaviour: 'prepend',
-        template: '<span class="icon icon-link"></span>',
-    }, opts);
-
-    let behaviour = opts.behaviour;
-
-    let methodMap = {
-        prepend: 'unshift',
-        append: 'push',
+        content: contentDefaults,
+        ...opts,
     };
 
-    function inject (node) {
-        return base(node, id => {
+    if (behaviour !== wrap && !linkProperties) {
+        linkProperties = {'aria-hidden': true};
+    }
+
+    function injectNode (node) {
+        return base(node, url => {
+            if (!Array.isArray(content)) {
+                content = [content];
+            }
             node.children[methodMap[behaviour]]({
-                type: 'link',
-                url: id,
+                type: link,
+                url,
                 title: null,
-                children: [],
                 data: {
-                    htmlContent: opts.template,
-                    htmlAttributes: opts.attributes || {'aria-hidden': true},
+                    hProperties: linkProperties,
+                    hChildren: content,
                 },
             });
         });
     }
 
-    function wrap (node) {
-        return base(node, id => {
-            let children = node.children;
+    function wrapNode (node) {
+        return base(node, url => {
+            const {children} = node;
 
             node.children = [{
-                type: 'link',
-                url: id,
+                type: link,
+                url,
                 title: null,
-                children: children,
+                children,
                 data: {
-                    htmlAttributes: opts.attributes,
+                    hProperties: linkProperties,
                 },
             }];
         });
     }
 
-    return ast => visit(ast, 'heading', behaviour === 'wrap' ? wrap : inject);
+    return ast => visit(ast, 'heading', behaviour === wrap ? wrapNode : injectNode);
 }

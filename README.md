@@ -40,29 +40,30 @@ console.log(result);
 
 #### options
 
-##### attributes
-
-Type: `object`
-
-By default, when using the `append` or `prepend` behaviour, this will add
-`aria-hidden="false"` to the anchor. When using the `wrap` behaviour, this is
-left empty for you to add any extra HTML attributes.
-
 ##### behaviour
 
 Type: `string`
 Default: `prepend`
 
 Set this to `prepend` to inject the link before the heading text; `append` after
-it, and `wrap` to wrap the whole heading text with the link. Note that the
-`wrap` option doesn't apply any value set by the `template` option.
+it, and `wrap` to wrap the whole heading text with the link. Note that supplying
+`wrap` will ignore any value defined by the `template` option.
 
-##### template
+##### content
 
-Type: `string`
-Default: `<span class="icon icon-link"></span>`
+Type: `Object|Array`
+Default: `{type: 'element', tagName: 'span', properties: {className: [icon, `${icon}-${link}`]} }`
 
-The template used by the `append` & `prepend` behaviours.
+Supply a list of HAST nodes or a single node here. For further details, please
+refer to the specification at https://github.com/wooorm/hast.
+
+##### linkProperties
+
+Type: `object`
+
+By default, when using the `append` or `prepend` behaviour, this will add
+`aria-hidden="false"` to the anchor. When using the `wrap` behaviour, this is
+left empty for you to add any extra HTML attributes.
 
 
 ## Contributing

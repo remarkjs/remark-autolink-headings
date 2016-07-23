@@ -15,6 +15,12 @@ test('should autolink headings', t => {
     });
 });
 
+test('should accept custom content', t => {
+    const md = '# method';
+    const {contents} = remark().use(slug).use(html).use(headings, {content: {type: 'text', value: '#'}}).process(md);
+    t.deepEqual(contents, '<h1 id="method"><a href="#method" aria-hidden="true">#</a>method</h1>\n');
+});
+
 test('should do nothing if slugs are not used', t => {
     let {contents} = remark().use(headings).use(html).process(base('input.md'));
     t.deepEqual(contents, base('output.html'));
