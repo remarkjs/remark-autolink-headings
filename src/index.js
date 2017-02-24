@@ -24,7 +24,7 @@ const contentDefaults = {
     properties: {className: [icon, `${icon}-${link}`]},
 };
 
-export default function attacher (remark, opts = {}) {
+export default function attacher (opts = {}) {
     let {linkProperties, behaviour, content} = {
         behaviour: 'prepend',
         content: contentDefaults,
