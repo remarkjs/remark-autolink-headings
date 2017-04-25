@@ -1,6 +1,6 @@
 {
   "name": "remark-autolink-headings",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "description": "Automatically add links to headings in Markdown.",
   "main": "dist/index.js",
   "files": [
