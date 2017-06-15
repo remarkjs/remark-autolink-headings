@@ -2,6 +2,9 @@
 
 > Automatically add links to headings in Markdown.
 
+This package integrates with [remark-html][html]. It may be better to work with
+[rehype], which is specifically made for HTML, and to use
+[rehype-autolink-headings] instead of this package.
 
 ## Install
 
@@ -108,4 +111,6 @@ MIT © [Ben Briggs](http://beneb.info)
 [npm]:     http://badge.fury.io/js/remark-autolink-headings
 [html]:    https://github.com/wooorm/remark-html
 [remark]:  https://github.com/wooorm/remark
+[rehype]:  https://github.com/wooorm/rehype
 [slug]:    https://github.com/wooorm/remark-slug
+[rehype-autolink-headings]: https://github.com/wooorm/rehype-autolink-headings
