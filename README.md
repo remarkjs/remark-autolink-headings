@@ -81,7 +81,7 @@ Type: `Object|Array`
 Default: `{type: 'element', tagName: 'span', properties: {className: [icon, `${icon}-${link}`]} }`
 
 Supply a list of HAST nodes or a single node here. For further details, please
-refer to the specification at https://github.com/wooorm/hast.
+refer to the specification at <https://github.com/syntax-tree/hast>.
 
 ##### linkProperties
 
