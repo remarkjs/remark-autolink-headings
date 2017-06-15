@@ -16,23 +16,49 @@ npm install remark-autolink-headings --save
 
 remark-autolink-headings is designed to work with
 [remark-html][html] & [remark-slug][slug], and creates GitHub style links for
-each of your headings:
+each of your headings.
 
-```js
-var remark   = require('remark');
-var html     = require('remark-html');
-var slug     = require('remark-slug');
-var headings = require('remark-autolink-headings');
+Say we have the following markdown file, `example.md`:
 
-var markdown = '# Hello';
-var result   = remark().use([ slug, headings, html ]).processSync(markdown);
-console.log(result);
-
-//=> <h1 id="hello"><a href="#hello" aria-hidden="true"><span class="icon icon-link"></span></a>Hello</h1>
+```markdown
+# Lorem ipsum 😪
+## dolor—sit—amet
+### consectetur &amp; adipisicing
+#### elit
+##### elit
 ```
 
-*Note that this module* ***must*** *be included after remark-slug.*
+And our script, `example.js`, looks as follows:
 
+```javascript
+var fs = require('fs');
+var unified = require('unified');
+var markdown = require('remark-parse');
+var html = require('remark-html');
+var slug = require('remark-slug');
+var headings = require('remark-autolink-headings');
+
+var result = unified()
+    .use(markdown)
+    .use(slug)
+    // Note that this module must be included after remark-slug.
+    .use(headings)
+    .use(html)
+    .processSync(fs.readFileSync('example.md'))
+    .toString();
+
+console.log(result);
+```
+
+Now, running `node example` yields:
+
+```html
+<h1 id="lorem-ipsum-"><a href="#lorem-ipsum-" aria-hidden="true"><span class="icon icon-link"></span></a>Lorem ipsum 😪</h1>
+<h2 id="dolorsitamet"><a href="#dolorsitamet" aria-hidden="true"><span class="icon icon-link"></span></a>dolor—sit—amet</h2>
+<h3 id="consectetur--adipisicing"><a href="#consectetur--adipisicing" aria-hidden="true"><span class="icon icon-link"></span></a>consectetur &#x26; adipisicing</h3>
+<h4 id="elit"><a href="#elit" aria-hidden="true"><span class="icon icon-link"></span></a>elit</h4>
+<h5 id="elit-1"><a href="#elit-1" aria-hidden="true"><span class="icon icon-link"></span></a>elit</h5>
+```
 
 ## API
 
