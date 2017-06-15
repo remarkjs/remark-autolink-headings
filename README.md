@@ -78,7 +78,7 @@ it, and `wrap` to wrap the whole heading text with the link. Note that supplying
 ##### content
 
 Type: `Object|Array`
-Default: `{type: 'element', tagName: 'span', properties: {className: [icon, `${icon}-${link}`]} }`
+Default: ``{type: 'element', tagName: 'span', properties: {className: [icon, `${icon}-${link}`]} }``
 
 Supply a list of HAST nodes or a single node here. For further details, please
 refer to the specification at <https://github.com/syntax-tree/hast>.
