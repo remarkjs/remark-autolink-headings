@@ -11,11 +11,11 @@ const methodMap = {
 
 const base = (node, callback) => {
     const {data} = node;
-    if (!data || !data.htmlAttributes || !data.htmlAttributes.id) {
+    if (!data || !data.hProperties || !data.hProperties.id) {
         return;
     }
 
-    return callback('#' + data.htmlAttributes.id);
+    return callback('#' + data.hProperties.id);
 };
 
 const contentDefaults = {

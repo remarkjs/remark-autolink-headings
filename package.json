@@ -35,9 +35,9 @@
     "eslint-config-cssnano": "^3.0.0",
     "eslint-plugin-babel": "^3.3.0",
     "eslint-plugin-import": "^2.0.1",
-    "remark": "^7.0.0",
-    "remark-html": "^6.0.0",
-    "remark-slug": "^4.1.0",
+    "remark": "^9.0.0",
+    "remark-html": "^7.0.0",
+    "remark-slug": "^5.0.0",
     "nyc": "^11.0.0"
   },
   "homepage": "https://github.com/ben-eb/remark-autolink-headings",
