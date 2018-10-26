@@ -1,4 +1,5 @@
 import visit from 'unist-util-visit'
+import extend from 'extend'
 
 const behaviours = {prepend: 'unshift', append: 'push'}
 
@@ -43,7 +44,10 @@ export default function attacher(opts = {}) {
       url,
       title: null,
       children: [],
-      data: {hProperties: linkProperties, hChildren}
+      data: {
+        hProperties: extend(true, {}, linkProperties),
+        hChildren: extend(true, [], hChildren)
+      }
     })
   }
 
@@ -54,7 +58,9 @@ export default function attacher(opts = {}) {
         url,
         title: null,
         children: node.children,
-        data: {hProperties: linkProperties}
+        data: {
+          hProperties: extend(true, {}, linkProperties)
+        }
       }
     ]
   }
