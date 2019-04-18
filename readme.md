@@ -90,7 +90,6 @@ By default, the following is used:
   type: 'element',
   tagName: 'span',
   properties: {className: ['icon', 'icon-link']}
-  children: []
 }
 ```
 
