@@ -1,7 +1,7 @@
 import visit from 'unist-util-visit'
 import extend from 'extend'
 
-const behaviours = {prepend: 'unshift', append: 'push'}
+const behaviors = {prepend: 'unshift', append: 'push'}
 
 const contentDefaults = {
   type: 'element',
@@ -9,14 +9,27 @@ const contentDefaults = {
   properties: {className: ['icon', 'icon-link']}
 }
 
-const defaults = {behaviour: 'prepend', content: contentDefaults}
+const defaults = {behavior: 'prepend', content: contentDefaults}
+
+let deprecationWarningIssued = false
 
 export default function attacher(opts = {}) {
-  let {linkProperties, behaviour, content} = {...defaults, ...opts}
+  let {linkProperties, behavior, content} = {...defaults, ...opts}
   let method
   let hChildren
 
-  if (behaviour === 'wrap') {
+  // NOTE: Remove in next major version
+  if (opts.behaviour !== undefined) {
+    if (!deprecationWarningIssued) {
+      deprecationWarningIssued = true
+      console.warn(
+        'Deprecation Warning: `behaviour` is a nonstandard option. Use `behavior` instead.'
+      )
+    }
+    behavior = opts.behaviour
+  }
+
+  if (behavior === 'wrap') {
     method = wrap
   } else {
     method = inject
@@ -39,7 +52,7 @@ export default function attacher(opts = {}) {
   }
 
   function inject(node, url) {
-    node.children[behaviours[behaviour]]({
+    node.children[behaviors[behavior]]({
       type: 'link',
       url,
       title: null,

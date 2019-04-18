@@ -71,7 +71,7 @@ Now, running `node example` yields:
 
 Add links to headings.
 
-#### `options.behaviour`
+#### `options.behavior`
 
 How to create links (`string`, default: `'prepend'`).
 Pass `'prepend'` to inject the link before the heading text, `'append'` for a
