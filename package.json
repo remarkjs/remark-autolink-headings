@@ -1,6 +1,6 @@
 {
   "name": "remark-autolink-headings",
-  "version": "5.1.0",
+  "version": "5.2.0",
   "description": "Automatically add links to headings in Markdown.",
   "license": "MIT",
   "keywords": [
