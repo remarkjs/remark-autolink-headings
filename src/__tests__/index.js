@@ -7,11 +7,25 @@ import html from 'remark-html'
 import headings from '..'
 
 const base = file => read(join(__dirname, 'fixtures', file), 'utf-8')
+const behaviors = ['append', 'prepend', 'wrap']
 
 test('should autolink headings', t => {
-  const behaviours = ['append', 'prepend', 'wrap']
+  behaviors.forEach(b => {
+    t.is(
+      remark()
+        .use(slug)
+        .use(html)
+        .use(headings, {behavior: b})
+        .processSync(base('input.md'))
+        .toString(),
+      base(`output.${b}.html`),
+      `should ${b} headings`
+    )
+  })
+})
 
-  behaviours.forEach(b => {
+test('should autolink headings with deprecated option', t => {
+  behaviors.forEach(b => {
     t.is(
       remark()
         .use(slug)
