@@ -26,6 +26,7 @@ export default function attacher(opts = {}) {
         'Deprecation Warning: `behaviour` is a nonstandard option. Use `behavior` instead.'
       )
     }
+
     behavior = opts.behaviour
   }
 
