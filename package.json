@@ -1,14 +1,17 @@
 {
   "name": "remark-autolink-headings",
   "version": "5.2.0",
-  "description": "Automatically add links to headings in Markdown.",
+  "description": "remark plugin to automatically add links to headings",
   "license": "MIT",
   "keywords": [
+    "unified",
+    "remark",
+    "plugin",
+    "mdast",
+    "markdown",
     "headings",
     "link",
-    "automatic",
-    "markdown",
-    "remark"
+    "automatic"
   ],
   "repository": "remarkjs/remark-autolink-headings",
   "bugs": "https://github.com/remarkjs/remark-autolink-headings/issues",
