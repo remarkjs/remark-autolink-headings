@@ -1,2 +1,4 @@
-dist
-coverage
+coverage/
+dist/
+remark-autolink-headings.js
+remark-autolink-headings.min.js

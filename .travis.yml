@@ -3,3 +3,13 @@ node_js:
   - lts/dubnium
   - node
 after_script: bash <(curl -s https://codecov.io/bash)
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key:
+    secure: AVEbMSkXqiotV4eI7EaWMw0EF6lleyTUPoPDV0o6VYQN7N0iuujjt7RvGOET6Hbk6EkMhJ/HIthNNqFBZlcntBJFXt9HiK8jIl/qI+UNp4e+viD5EQ8ZoA7OHnXadQuT0Xkft7q96wsrTne1xWNC8Psv1iLA4TpKKXZBYjYg4q692Gm0qDhuwqJXCSLSUxEE40+5UbuuZ15cPvxqaXhobhiWay2yNuvvLtDZrSMWXTKw5KTCiNS5LbC3XQm9peMqm+Yt94SvpNpUqok8SMi23ktwJxQRLLbqaksJQBFG+88Ek7zY03yJa7Gpn1IqJgw8+eHfwDJRpJlusvFClrDEtMQc2AVtYSnlXZ9jmW7s+D34/9jby1eW3vXUNnmCBvk4VXGx8lktDNthtpNOM6ZMsqlrblVoLDE17kMZkEZkkX9Zl8JPvTmN2id925qBl4Lyo/VjDyVxwOSayQOz5NgTyfagru/amnobTPupU04oEqHS1iiRHXd337sAEXS4wiWAmNVyeM7uh3QGBqUPab8LblHgcVW6KQXv7bI2AOr7RKdloCmmHIDMrk1kpd8gA6QEvq91+gFVmqnmGTIdD0cHffcV+TgROstypo0FHr1s5tseq7oD1+aDOtjYqCLJz/4LmHdwACWtkPf7DmPj/8AqttipPhTbbRHj0fd2mCs/9r4=
+  file:
+    - 'remark-autolink-headings.js'
+    - 'remark-autolink-headings.min.js'
+  on:
+    tags: true
