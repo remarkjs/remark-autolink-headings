@@ -3,25 +3,27 @@
 [![Build][build-badge]][build]
 [![Coverage][coverage-badge]][coverage]
 [![Downloads][downloads-badge]][downloads]
-[![Chat][chat-badge]][chat]
+[![Size][size-badge]][size]
 [![Sponsors][sponsors-badge]][collective]
 [![Backers][backers-badge]][collective]
+[![Chat][chat-badge]][chat]
 
-Automatically add links to headings with [**remark**][remark].
+[**remark**][remark] plugin to automatically add links to headings.
 
-This package integrates with [remark-html][remark-html].
-It may be better to work with [**rehype**][rehype], which is specifically made
-for HTML, and to use [rehype-autolink-headings][] instead of this package.
+> This package integrates with [`remark-html`][remark-html].
+> It may be better to work with [**rehype**][rehype], which is specifically made
+> for HTML, and to use [`rehype-autolink-headings`][rehype-autolink-headings]
+> instead of this package.
 
-## Installation
+## Install
 
 [npm][]:
 
-```bash
+```sh
 npm install remark-autolink-headings
 ```
 
-## Example
+## Use
 
 Say we have the following markdown file, `example.md`:
 
@@ -35,7 +37,7 @@ Say we have the following markdown file, `example.md`:
 
 And our script, `example.js`, looks as follows:
 
-```javascript
+```js
 const fs = require('fs')
 const unified = require('unified')
 const markdown = require('remark-parse')
@@ -46,7 +48,7 @@ const headings = require('remark-autolink-headings')
 const contents = unified()
   .use(markdown)
   .use(slug)
-  // Note that this module must be included after remark-slug.
+  // Note that this module must be included after `remark-slug`.
   .use(headings)
   .use(html)
   .processSync(fs.readFileSync('example.md'))
@@ -67,11 +69,13 @@ Now, running `node example` yields:
 
 ## API
 
-### `remark.use(autolinkHeadings[, options])`
+### `remark().use(autolinkHeadings[, options])`
 
-Add links to headings.
+Automatically add links to headings.
 
-#### `options.behavior`
+##### `options`
+
+###### `options.behavior`
 
 How to create links (`string`, default: `'prepend'`).
 Pass `'prepend'` to inject the link before the heading text, `'append'` for a
@@ -80,9 +84,9 @@ the link.
 Note that supplying `wrap` will ignore any value defined by the `content`
 option.
 
-#### `options.content`
+###### `options.content`
 
-[HAST][] nodes to insert in the link (`Node|Children`).
+[**hast**][hast] nodes to insert in the link (`Node|Children`).
 By default, the following is used:
 
 ```js
@@ -93,18 +97,20 @@ By default, the following is used:
 }
 ```
 
-#### `options.linkProperties`
+###### `options.linkProperties`
 
 Extra properties to set on the link (`Object?`).
 Defaults to `{ariaHidden: true}` when in `'prepend'` or `'append'` mode.
 
 ## Contribute
 
-See [`contributing.md` in `remarkjs/remark`][contributing] for ways to get
-started.
+See [`contributing.md`][contributing] in [`remarkjs/.github`][health] for ways
+to get started.
+See [`support.md`][support] for ways to get help.
 
-This organisation has a [Code of Conduct][coc].  By interacting with this
-repository, organisation, or community you agree to abide by its terms.
+This project has a [Code of Conduct][coc].
+By interacting with this repository, organisation, or community you agree to
+abide by its terms.
 
 ## License
 
@@ -112,7 +118,11 @@ repository, organisation, or community you agree to abide by its terms.
 
 <!-- Definitions -->
 
-[build-badge]: https://img.shields.io/travis/remarkjs/remark-autolink-headings.svg
+[MIT][license] © [Ben Briggs][author]
+
+<!-- Definitions -->
+
+[build-badge]: https://img.shields.io/travis/remarkjs/remark-autolink-headings/master.svg
 
 [build]: https://travis-ci.org/remarkjs/remark-autolink-headings
 
@@ -124,9 +134,9 @@ repository, organisation, or community you agree to abide by its terms.
 
 [downloads]: https://www.npmjs.com/package/remark-autolink-headings
 
-[chat-badge]: https://img.shields.io/badge/join%20the%20community-on%20spectrum-7b16ff.svg
+[size-badge]: https://img.shields.io/bundlephobia/minzip/remark-autolink-headings.svg
 
-[chat]: https://spectrum.chat/unified/remark
+[size]: https://bundlephobia.com/result?p=remark-autolink-headings
 
 [sponsors-badge]: https://opencollective.com/unified/sponsors/badge.svg
 
@@ -134,15 +144,23 @@ repository, organisation, or community you agree to abide by its terms.
 
 [collective]: https://opencollective.com/unified
 
-[license]: license
+[chat-badge]: https://img.shields.io/badge/join%20the%20community-on%20spectrum-7b16ff.svg
 
-[author]: http://beneb.info
+[chat]: https://spectrum.chat/unified/remark
 
 [npm]: https://docs.npmjs.com/cli/install
 
-[contributing]: https://github.com/remarkjs/remark/blob/master/contributing.md
+[health]: https://github.com/remarkjs/.github
 
-[coc]: https://github.com/remarkjs/remark/blob/master/code-of-conduct.md
+[contributing]: https://github.com/remarkjs/.github/blob/master/contributing.md
+
+[support]: https://github.com/remarkjs/.github/blob/master/support.md
+
+[coc]: https://github.com/remarkjs/.github/blob/master/code-of-conduct.md
+
+[license]: license
+
+[author]: http://beneb.info
 
 [remark]: https://github.com/remarkjs/remark
 
