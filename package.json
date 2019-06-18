@@ -24,7 +24,7 @@
   "module": "src/index.js",
   "files": [
     "dist",
-    "src"
+    "src/index.js"
   ],
   "dependencies": {
     "extend": "^3.0.2",
