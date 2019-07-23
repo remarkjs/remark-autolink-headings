@@ -102,6 +102,14 @@ By default, the following is used:
 Extra properties to set on the link (`Object?`).
 Defaults to `{ariaHidden: true}` when in `'prepend'` or `'append'` mode.
 
+## Security
+
+Use of `remark-autolink-headings` can open you up to a
+[cross-site scripting (XSS)][xss] attack if you pass user provided content in
+`linkProperties` or `content`.
+
+Always be wary of user input and use [`rehype-sanitize`][sanitize].
+
 ## Contribute
 
 See [`contributing.md`][contributing] in [`remarkjs/.github`][health] for ways
@@ -113,10 +121,6 @@ By interacting with this repository, organisation, or community you agree to
 abide by its terms.
 
 ## License
-
-[MIT][license] © [Ben Briggs][author]
-
-<!-- Definitions -->
 
 [MIT][license] © [Ben Briggs][author]
 
@@ -171,3 +175,7 @@ abide by its terms.
 [rehype-autolink-headings]: https://github.com/rehypejs/rehype-autolink-headings
 
 [hast]: https://github.com/syntax-tree/hast
+
+[xss]: https://en.wikipedia.org/wiki/Cross-site_scripting
+
+[sanitize]: https://github.com/rehypejs/rehype-sanitize
