@@ -23,7 +23,7 @@ export default function attacher(opts = {}) {
     if (!deprecationWarningIssued) {
       deprecationWarningIssued = true
       console.warn(
-        'Deprecation Warning: `behaviour` is a nonstandard option. Use `behavior` instead.'
+        '[remark-autolink-headings] Deprecation Warning: `behaviour` is a nonstandard option. Use `behavior` instead.'
       )
     }
 
