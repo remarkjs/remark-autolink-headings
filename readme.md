@@ -85,8 +85,8 @@ How to create links (`string`, default: `'prepend'`).
 *   `'before'` — insert link before the heading
 *   `'after'` — insert link after the heading
 
-Note that supplying `wrap` will ignore any value defined by the `content`
-option.
+Supplying `wrap` will ignore any value defined by the `content` option.
+Supplying `prepend`, `append`, or `wrap` will ignore the `group` option.
 
 ###### `options.content`
 
@@ -100,6 +100,8 @@ By default, the following is used:
   properties: {className: ['icon', 'icon-link']}
 }
 ```
+
+If `behavior` is `wrap`, then `content` is ignored.
 
 If `content` is a function, it’s called with the current heading (`Node`) and
 should return one or more nodes:
@@ -115,6 +117,27 @@ function content(node) {
     h('span.visually-hidden', 'Read the “', toString(node), '” section'),
     h('span.icon.icon-link', {ariaHidden: true})
   ]
+}
+```
+
+###### `options.group`
+
+[**hast**][hast] node to wrap the heading and link with (`Function|Node`), if
+`behavior` is `before` or `after`.
+There is no default.
+
+If `behavior` is `prepend`, `append`, or `wrap`, then `group` is ignored.
+
+If `group` is a function, it’s called with the current heading (`Node`) and
+should return a hast node.
+
+```js
+const h = require('hastscript')
+
+// …
+
+function group(node) {
+  return h('div.heading-' + node.depth + '-group')
 }
 ```
 

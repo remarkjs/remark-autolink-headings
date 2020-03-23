@@ -94,6 +94,43 @@ test('should accept link properties', (t) => {
   )
 })
 
+test('should accept a custom group', (t) => {
+  t.is(
+    remark()
+      .use(slug)
+      .use(html)
+      .use(headings, {
+        group: {
+          tagName: 'div',
+          properties: {className: ['heading-group']}
+        },
+        behaviour: 'before'
+      })
+      .processSync('# method')
+      .toString(),
+    '<div class="heading-group"><a href="#method"><span class="icon icon-link"></span></a><h1 id="method">method</h1></div>\n'
+  )
+})
+
+test('should accept a custom group as a function', (t) => {
+  t.is(
+    remark()
+      .use(slug)
+      .use(html)
+      .use(headings, {group, behaviour: 'after'})
+      .processSync('# method')
+      .toString(),
+    '<div class="heading-1-group"><h1 id="method">method</h1><a href="#method"><span class="icon icon-link"></span></a></div>\n'
+  )
+
+  function group(node) {
+    return {
+      tagName: 'div',
+      properties: {className: ['heading-' + node.depth + '-group']}
+    }
+  }
+})
+
 test('should do nothing if slugs are not used', (t) => {
   t.is(
     remark().use(headings).use(html).processSync(base('input.md')).toString(),

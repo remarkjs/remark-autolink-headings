@@ -16,7 +16,7 @@ const splice = [].splice
 let deprecationWarningIssued = false
 
 export default function attacher(options = {}) {
-  let {linkProperties, behavior, content} = {...defaults, ...options}
+  let {linkProperties, behavior, content, group} = {...defaults, ...options}
   let method
 
   // NOTE: Remove in next major version
@@ -67,13 +67,19 @@ export default function attacher(options = {}) {
 
   function around(node, url, index, parent) {
     const link = create(url)
+    const grouping = group ? toGrouping(group, node) : undefined
 
     link.data = {
       hProperties: toProps(linkProperties),
       hChildren: toChildren(content, node)
     }
 
-    const nodes = behavior === 'before' ? [link, node] : [node, link]
+    let nodes = behavior === 'before' ? [link, node] : [node, link]
+
+    if (grouping) {
+      grouping.children = nodes
+      nodes = grouping
+    }
 
     splice.apply(parent.children, [index, 1].concat(nodes))
 
@@ -92,12 +98,34 @@ export default function attacher(options = {}) {
     return deepAssign({}, value)
   }
 
+  function toNode(value, node) {
+    return typeof value === 'function' ? value(node) : value
+  }
+
   function toChildren(value, node) {
-    let children = typeof value === 'function' ? value(node) : value
+    let children = toNode(value, node)
 
     children = Array.isArray(children) ? children : [children]
 
     return typeof value === 'function' ? children : deepAssign([], children)
+  }
+
+  function toGrouping(value, node) {
+    const grouping = toNode(value, node)
+    const hName = grouping.tagName
+    const hProperties = grouping.properties
+
+    return {
+      type: 'heading-group',
+      data: {
+        hName,
+        hProperties:
+          typeof value === 'function'
+            ? deepAssign({}, hProperties)
+            : hProperties
+      },
+      children: []
+    }
   }
 
   function create(url, children) {
