@@ -11,6 +11,8 @@ const contentDefaults = {
 
 const defaults = {behavior: 'prepend', content: contentDefaults}
 
+const splice = [].splice
+
 let deprecationWarningIssued = false
 
 export default function attacher(options = {}) {
@@ -31,6 +33,8 @@ export default function attacher(options = {}) {
 
   if (behavior === 'wrap') {
     method = wrap
+  } else if (behavior === 'before' || behavior === 'after') {
+    method = around
   } else {
     method = inject
 
@@ -41,45 +45,71 @@ export default function attacher(options = {}) {
 
   return (tree) => visit(tree, 'heading', visitor)
 
-  function visitor(node) {
+  function visitor(node, index, parent) {
     const {data} = node
     const id = data && data.hProperties && data.hProperties.id
 
     if (id) {
-      method(node, '#' + id)
+      return method(node, '#' + id, index, parent)
     }
   }
 
   function inject(node, url) {
-    const hProperties = extend(true, {}, linkProperties)
-    let hChildren = typeof content === 'function' ? content(node) : content
+    const link = create(url)
 
-    hChildren = Array.isArray(hChildren) ? hChildren : [hChildren]
-
-    if (typeof content !== 'function') {
-      hChildren = extend(true, [], hChildren)
+    link.data = {
+      hProperties: toProps(linkProperties),
+      hChildren: toChildren(content, node)
     }
 
-    node.children[behaviors[behavior]]({
-      type: 'link',
-      url,
-      title: null,
-      children: [],
-      data: {hProperties, hChildren}
-    })
+    node.children[behaviors[behavior]](link)
+  }
+
+  function around(node, url, index, parent) {
+    const link = create(url)
+
+    link.data = {
+      hProperties: toProps(linkProperties),
+      hChildren: toChildren(content, node)
+    }
+
+    const nodes = behavior === 'before' ? [link, node] : [node, link]
+
+    splice.apply(parent.children, [index, 1].concat(nodes))
+
+    return [visit.SKIP, index + nodes.length]
   }
 
   function wrap(node, url) {
-    node.children = [
-      {
-        type: 'link',
-        url,
-        title: null,
-        children: node.children,
-        data: {
-          hProperties: extend(true, {}, linkProperties)
-        }
-      }
-    ]
+    const link = create(url, node.children)
+
+    link.data = {hProperties: toProps(linkProperties)}
+
+    node.children = [link]
+  }
+
+  function toProps(value) {
+    return deepAssign({}, value)
+  }
+
+  function toChildren(value, node) {
+    let children = typeof value === 'function' ? value(node) : value
+
+    children = Array.isArray(children) ? children : [children]
+
+    return typeof value === 'function' ? children : deepAssign([], children)
+  }
+
+  function create(url, children) {
+    return {
+      type: 'link',
+      url,
+      title: null,
+      children: children || []
+    }
+  }
+
+  function deepAssign(base, value) {
+    return extend(true, base, value)
   }
 }

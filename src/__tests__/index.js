@@ -7,7 +7,7 @@ import html from 'remark-html'
 import headings from '..'
 
 const base = (file) => read(join(__dirname, 'fixtures', file), 'utf-8')
-const behaviors = ['append', 'prepend', 'wrap']
+const behaviors = ['append', 'prepend', 'after', 'before', 'wrap']
 
 test('should autolink headings', (t) => {
   behaviors.forEach((b) => {
