@@ -88,6 +88,12 @@ How to create links (`string`, default: `'prepend'`).
 Supplying `wrap` will ignore any value defined by the `content` option.
 Supplying `prepend`, `append`, or `wrap` will ignore the `group` option.
 
+###### `options.linkProperties`
+
+Extra properties to set on the link (`Object?`).
+Defaults to `{ariaHidden: true, tabIndex: -1}` when in `'prepend'` or `'append'`
+mode.
+
 ###### `options.content`
 
 [**hast**][hast] nodes to insert in the link (`Function|Node|Children`).
@@ -140,12 +146,6 @@ function group(node) {
   return h('div.heading-' + node.depth + '-group')
 }
 ```
-
-###### `options.linkProperties`
-
-Extra properties to set on the link (`Object?`).
-Defaults to `{ariaHidden: true, tabIndex: -1}` when in `'prepend'` or `'append'`
-mode.
 
 ## Security
 
