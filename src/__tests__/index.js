@@ -6,11 +6,11 @@ import slug from 'remark-slug'
 import html from 'remark-html'
 import headings from '..'
 
-const base = file => read(join(__dirname, 'fixtures', file), 'utf-8')
+const base = (file) => read(join(__dirname, 'fixtures', file), 'utf-8')
 const behaviors = ['append', 'prepend', 'wrap']
 
-test('should autolink headings', t => {
-  behaviors.forEach(b => {
+test('should autolink headings', (t) => {
+  behaviors.forEach((b) => {
     t.is(
       remark()
         .use(slug)
@@ -24,8 +24,8 @@ test('should autolink headings', t => {
   })
 })
 
-test('should autolink headings with deprecated option', t => {
-  behaviors.forEach(b => {
+test('should autolink headings with deprecated option', (t) => {
+  behaviors.forEach((b) => {
     t.is(
       remark()
         .use(slug)
@@ -39,7 +39,7 @@ test('should autolink headings with deprecated option', t => {
   })
 })
 
-test('should accept custom content', t => {
+test('should accept custom content', (t) => {
   t.is(
     remark()
       .use(slug)
@@ -51,7 +51,7 @@ test('should accept custom content', t => {
   )
 })
 
-test('should accept custom content as an array', t => {
+test('should accept custom content as an array', (t) => {
   t.is(
     remark()
       .use(slug)
@@ -63,7 +63,7 @@ test('should accept custom content as an array', t => {
   )
 })
 
-test('should accept link properties', t => {
+test('should accept link properties', (t) => {
   t.is(
     remark()
       .use(slug)
@@ -75,13 +75,9 @@ test('should accept link properties', t => {
   )
 })
 
-test('should do nothing if slugs are not used', t => {
+test('should do nothing if slugs are not used', (t) => {
   t.is(
-    remark()
-      .use(headings)
-      .use(html)
-      .processSync(base('input.md'))
-      .toString(),
+    remark().use(headings).use(html).processSync(base('input.md')).toString(),
     base('output.html')
   )
 })

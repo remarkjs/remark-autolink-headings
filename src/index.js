@@ -13,13 +13,13 @@ const defaults = {behavior: 'prepend', content: contentDefaults}
 
 let deprecationWarningIssued = false
 
-export default function attacher(opts = {}) {
-  let {linkProperties, behavior, content} = {...defaults, ...opts}
+export default function attacher(options = {}) {
+  let {linkProperties, behavior, content} = {...defaults, ...options}
   let method
   let hChildren
 
   // NOTE: Remove in next major version
-  if (opts.behaviour !== undefined) {
+  if (options.behaviour !== undefined) {
     if (!deprecationWarningIssued) {
       deprecationWarningIssued = true
       console.warn(
@@ -27,7 +27,7 @@ export default function attacher(opts = {}) {
       )
     }
 
-    behavior = opts.behaviour
+    behavior = options.behaviour
   }
 
   if (behavior === 'wrap') {
@@ -41,7 +41,7 @@ export default function attacher(opts = {}) {
     }
   }
 
-  return ast => visit(ast, 'heading', visitor)
+  return (tree) => visit(tree, 'heading', visitor)
 
   function visitor(node) {
     const {data} = node
