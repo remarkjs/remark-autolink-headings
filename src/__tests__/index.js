@@ -47,7 +47,7 @@ test('should accept custom content', (t) => {
       .use(headings, {content: {type: 'text', value: '#'}})
       .processSync('# method')
       .toString(),
-    '<h1 id="method"><a href="#method" aria-hidden="true">#</a>method</h1>\n'
+    '<h1 id="method"><a href="#method" aria-hidden="true" tabindex="-1">#</a>method</h1>\n'
   )
 })
 
@@ -59,7 +59,7 @@ test('should accept custom content as an array', (t) => {
       .use(headings, {content: [{type: 'text', value: '#'}]})
       .processSync('# method')
       .toString(),
-    '<h1 id="method"><a href="#method" aria-hidden="true">#</a>method</h1>\n'
+    '<h1 id="method"><a href="#method" aria-hidden="true" tabindex="-1">#</a>method</h1>\n'
   )
 })
 

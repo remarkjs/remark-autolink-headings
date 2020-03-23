@@ -60,11 +60,11 @@ console.log(contents)
 Now, running `node example` yields:
 
 ```html
-<h1 id="lorem-ipsum-"><a href="#lorem-ipsum-" aria-hidden="true"><span class="icon icon-link"></span></a>Lorem ipsum 😪</h1>
-<h2 id="dolorsitamet"><a href="#dolorsitamet" aria-hidden="true"><span class="icon icon-link"></span></a>dolor—sit—amet</h2>
-<h3 id="consectetur--adipisicing"><a href="#consectetur--adipisicing" aria-hidden="true"><span class="icon icon-link"></span></a>consectetur &#x26; adipisicing</h3>
-<h4 id="elit"><a href="#elit" aria-hidden="true"><span class="icon icon-link"></span></a>elit</h4>
-<h5 id="elit-1"><a href="#elit-1" aria-hidden="true"><span class="icon icon-link"></span></a>elit</h5>
+<h1 id="lorem-ipsum-"><a href="#lorem-ipsum-" aria-hidden="true" tabindex="-1"><span class="icon icon-link"></span></a>Lorem ipsum 😪</h1>
+<h2 id="dolorsitamet"><a href="#dolorsitamet" aria-hidden="true" tabindex="-1"><span class="icon icon-link"></span></a>dolor—sit—amet</h2>
+<h3 id="consectetur--adipisicing"><a href="#consectetur--adipisicing" aria-hidden="true" tabindex="-1"><span class="icon icon-link"></span></a>consectetur &#x26; adipisicing</h3>
+<h4 id="elit"><a href="#elit" aria-hidden="true" tabindex="-1"><span class="icon icon-link"></span></a>elit</h4>
+<h5 id="elit-1"><a href="#elit-1" aria-hidden="true" tabindex="-1"><span class="icon icon-link"></span></a>elit</h5>
 ```
 
 ## API
@@ -100,7 +100,8 @@ By default, the following is used:
 ###### `options.linkProperties`
 
 Extra properties to set on the link (`Object?`).
-Defaults to `{ariaHidden: true}` when in `'prepend'` or `'append'` mode.
+Defaults to `{ariaHidden: true, tabIndex: -1}` when in `'prepend'` or `'append'`
+mode.
 
 ## Security
 

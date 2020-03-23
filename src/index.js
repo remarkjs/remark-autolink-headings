@@ -37,7 +37,7 @@ export default function attacher(options = {}) {
     hChildren = Array.isArray(content) ? content : [content]
 
     if (!linkProperties) {
-      linkProperties = {ariaHidden: 'true'}
+      linkProperties = {ariaHidden: 'true', tabIndex: -1}
     }
   }
 
