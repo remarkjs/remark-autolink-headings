@@ -63,6 +63,25 @@ test('should accept custom content as an array', (t) => {
   )
 })
 
+test('should accept custom content as a function', (t) => {
+  t.is(
+    remark()
+      .use(slug)
+      .use(html)
+      .use(headings, {content, linkProperties: {}})
+      .processSync('# method')
+      .toString(),
+    '<h1 id="method"><a href="#method">Read the “method” section</a>method</h1>\n'
+  )
+
+  function content(node) {
+    return {
+      type: 'text',
+      value: 'Read the “' + node.children[0].value + '” section'
+    }
+  }
+})
+
 test('should accept link properties', (t) => {
   t.is(
     remark()

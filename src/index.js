@@ -16,7 +16,6 @@ let deprecationWarningIssued = false
 export default function attacher(options = {}) {
   let {linkProperties, behavior, content} = {...defaults, ...options}
   let method
-  let hChildren
 
   // NOTE: Remove in next major version
   if (options.behaviour !== undefined) {
@@ -34,7 +33,6 @@ export default function attacher(options = {}) {
     method = wrap
   } else {
     method = inject
-    hChildren = Array.isArray(content) ? content : [content]
 
     if (!linkProperties) {
       linkProperties = {ariaHidden: 'true', tabIndex: -1}
@@ -53,15 +51,21 @@ export default function attacher(options = {}) {
   }
 
   function inject(node, url) {
+    const hProperties = extend(true, {}, linkProperties)
+    let hChildren = typeof content === 'function' ? content(node) : content
+
+    hChildren = Array.isArray(hChildren) ? hChildren : [hChildren]
+
+    if (typeof content !== 'function') {
+      hChildren = extend(true, [], hChildren)
+    }
+
     node.children[behaviors[behavior]]({
       type: 'link',
       url,
       title: null,
       children: [],
-      data: {
-        hProperties: extend(true, {}, linkProperties),
-        hChildren: extend(true, [], hChildren)
-      }
+      data: {hProperties, hChildren}
     })
   }
 

@@ -45,7 +45,7 @@ const html = require('remark-html')
 const slug = require('remark-slug')
 const headings = require('remark-autolink-headings')
 
-const contents = unified()
+const doc = unified()
   .use(markdown)
   .use(slug)
   // Note that this module must be included after `remark-slug`.
@@ -54,7 +54,7 @@ const contents = unified()
   .processSync(fs.readFileSync('example.md'))
   .toString()
 
-console.log(contents)
+console.log(doc)
 ```
 
 Now, running `node example` yields:
@@ -86,7 +86,7 @@ option.
 
 ###### `options.content`
 
-[**hast**][hast] nodes to insert in the link (`Node|Children`).
+[**hast**][hast] nodes to insert in the link (`Function|Node|Children`).
 By default, the following is used:
 
 ```js
@@ -94,6 +94,23 @@ By default, the following is used:
   type: 'element',
   tagName: 'span',
   properties: {className: ['icon', 'icon-link']}
+}
+```
+
+If `content` is a function, it’s called with the current heading (`Node`) and
+should return one or more nodes:
+
+```js
+const toString = require('mdast-util-to-string')
+const h = require('hastscript')
+
+// …
+
+function content(node) {
+  return [
+    h('span.visually-hidden', 'Read the “', toString(node), '” section'),
+    h('span.icon.icon-link', {ariaHidden: true})
+  ]
 }
 ```
 
