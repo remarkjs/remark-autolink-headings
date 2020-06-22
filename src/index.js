@@ -6,7 +6,8 @@ const behaviors = {prepend: 'unshift', append: 'push'}
 const contentDefaults = {
   type: 'element',
   tagName: 'span',
-  properties: {className: ['icon', 'icon-link']}
+  properties: {className: ['icon', 'icon-link']},
+  children: []
 }
 
 const defaults = {behavior: 'prepend', content: contentDefaults}
