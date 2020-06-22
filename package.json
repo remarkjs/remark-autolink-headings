@@ -1,6 +1,6 @@
 {
   "name": "remark-autolink-headings",
-  "version": "6.0.0",
+  "version": "6.0.1",
   "description": "remark plugin to automatically add links to headings",
   "license": "MIT",
   "keywords": [
