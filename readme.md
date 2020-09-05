@@ -23,7 +23,7 @@
 npm install remark-autolink-headings
 ```
 
-## Use
+## Use - Unified
 
 Say we have the following markdown file, `example.md`:
 
@@ -66,6 +66,18 @@ Now, running `node example` yields:
 <h4 id="elit"><a href="#elit" aria-hidden="true" tabindex="-1"><span class="icon icon-link"></span></a>elit</h4>
 <h5 id="elit-1"><a href="#elit-1" aria-hidden="true" tabindex="-1"><span class="icon icon-link"></span></a>elit</h5>
 ```
+
+## Use - Next.js
+
+Configure remark MDX plugins inside `next.config.js`.  Autolink Headings requires `remark-slug` to be installed.
+
+```
+module.exports = withMdx({
+  remarkPlugins: [
+    require("remark-autolink-headings"),
+    require("remark-slug"),
+  ],
+ ```
 
 ## API
 
