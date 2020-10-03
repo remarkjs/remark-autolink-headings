@@ -15,6 +15,12 @@
 > for HTML, and to use [`rehype-autolink-headings`][rehype-autolink-headings]
 > instead of this package.
 
+## Note!
+
+This plugin is ready for the new parser in remark
+([`remarkjs/remark#536`](https://github.com/remarkjs/remark/pull/536)).
+No change is needed: it works exactly the same now as it did before!
+
 ## Install
 
 [npm][]:
