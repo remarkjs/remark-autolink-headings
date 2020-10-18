@@ -15,6 +15,10 @@
 > for HTML, and to use [`rehype-autolink-headings`][rehype-autolink-headings]
 > instead of this package.
 
+<!---->
+
+> This package expects [`remark-slug`][remark-slug] to be used before it.
+
 ## Note!
 
 This plugin is ready for the new parser in remark
@@ -218,6 +222,8 @@ abide by its terms.
 [author]: http://beneb.info
 
 [remark]: https://github.com/remarkjs/remark
+
+[remark-slug]: https://github.com/remarkjs/remark-slug
 
 [remark-html]: https://github.com/remarkjs/remark-html
 
