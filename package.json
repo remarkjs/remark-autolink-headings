@@ -51,7 +51,7 @@
     "remark-preset-wooorm": "^8.0.0",
     "remark-slug": "^6.0.0",
     "tinyify": "^3.0.0",
-    "xo": "^0.33.0"
+    "xo": "^0.34.0"
   },
   "scripts": {
     "prepublishOnly": "npm run compile",

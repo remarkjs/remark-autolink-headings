@@ -1,12 +1,12 @@
 import {readFileSync as read} from 'fs'
-import {join} from 'path'
+import path from 'path'
 import test from 'ava'
 import remark from 'remark'
 import slug from 'remark-slug'
 import html from 'remark-html'
 import headings from '..'
 
-const base = (file) => read(join(__dirname, 'fixtures', file), 'utf-8')
+const base = (file) => read(path.join(__dirname, 'fixtures', file), 'utf-8')
 const behaviors = ['append', 'prepend', 'after', 'before', 'wrap']
 
 test('should autolink headings', (t) => {
