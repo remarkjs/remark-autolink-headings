@@ -181,9 +181,9 @@ abide by its terms.
 
 <!-- Definitions -->
 
-[build-badge]: https://img.shields.io/travis/remarkjs/remark-autolink-headings/main.svg
+[build-badge]: https://github.com/remarkjs/remark-autolink-headings/workflows/main/badge.svg
 
-[build]: https://travis-ci.org/remarkjs/remark-autolink-headings
+[build]: https://github.com/remarkjs/remark-autolink-headings/actions
 
 [coverage-badge]: https://img.shields.io/codecov/c/github/remarkjs/remark-autolink-headings.svg
 
