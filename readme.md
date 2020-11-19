@@ -10,14 +10,16 @@
 
 [**remark**][remark] plugin to automatically add links to headings.
 
-> This package integrates with [`remark-html`][remark-html].
-> It may be better to work with [**rehype**][rehype], which is specifically made
+> This package integrates with [`remark-html`][remark-html] (or alternatives).
+> It is better to work with [**rehype**][rehype], which is specifically made
 > for HTML, and to use [`rehype-autolink-headings`][rehype-autolink-headings]
 > instead of this package.
 
 <!---->
 
-> This package expects [`remark-slug`][remark-slug] to be used before it.
+> This package works with headings that have IDs.
+> One way to add IDs to headings is by using [`remark-slug`][remark-slug] before
+> this plugin.
 
 ## Note!
 
