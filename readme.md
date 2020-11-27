@@ -103,7 +103,7 @@ Supplying `prepend`, `append`, or `wrap` will ignore the `group` option.
 ###### `options.linkProperties`
 
 Extra properties to set on the link (`Object?`).
-Defaults to `{ariaHidden: true, tabIndex: -1}` when in `'prepend'` or `'append'`
+Defaults to `{ariaHidden: 'true', tabIndex: -1}` when in `'prepend'` or `'append'`
 mode.
 
 ###### `options.content`
@@ -133,7 +133,7 @@ const h = require('hastscript')
 function content(node) {
   return [
     h('span.visually-hidden', 'Read the “', toString(node), '” section'),
-    h('span.icon.icon-link', {ariaHidden: true})
+    h('span.icon.icon-link', {ariaHidden: 'true'})
   ]
 }
 ```
