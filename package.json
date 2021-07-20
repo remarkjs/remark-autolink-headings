@@ -27,12 +27,16 @@
   ],
   "main": "dist/index.js",
   "module": "src/index.js",
+  "types": "types/index.d.ts",
   "files": [
     "dist",
+    "types/index.d.ts",
     "src/index.js"
   ],
   "dependencies": {
+    "@types/hast": "^2.0.0",
     "extend": "^3.0.0",
+    "unified": "^9.0.0",
     "unist-util-visit": "^2.0.0"
   },
   "devDependencies": {
@@ -43,6 +47,8 @@
     "ava": "3.0.0",
     "babel-plugin-add-module-exports": "^1.0.0",
     "browserify": "^17.0.0",
+    "dtslint": "^4.0.0",
+    "hastscript": "^7.0.0",
     "nyc": "^15.0.0",
     "prettier": "^2.0.0",
     "remark": "^13.0.0",
@@ -62,7 +68,8 @@
     "bundle": "npm run build-bundle && npm run build-mangle",
     "test-api": "ava",
     "test-coverage": "nyc --reporter lcov ava",
-    "test": "npm run compile && npm run format && npm run bundle && npm run test-coverage"
+    "test-types": "dtslint types",
+    "test": "npm run compile && npm run format && npm run bundle && npm run test-coverage && npm run test-types"
   },
   "browserslist": "> 2.5%, node 6",
   "babel": {
