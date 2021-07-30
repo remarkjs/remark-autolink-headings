@@ -100,7 +100,10 @@
     "trailingComma": "none"
   },
   "xo": {
-    "prettier": true
+    "prettier": true,
+    "ignore": [
+      "types/"
+    ]
   },
   "remarkConfig": {
     "plugins": [

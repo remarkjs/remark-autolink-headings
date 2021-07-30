@@ -1,7 +1,7 @@
+// Minimum TypeScript Version: 3.9
 import {Plugin} from 'unified'
 import {Node} from 'unist'
 import {Element} from 'hast'
-
 
 interface BaseOptions {
   /**
@@ -20,45 +20,58 @@ interface BaseOptions {
   group?: Element | ((node: Node) => Element)
 }
 
-
-interface RemarkAutolinkHeadingsBeforeOptions extends Pick<BaseOptions, 'linkProperties' | 'content' | 'group'> {
+interface RemarkAutolinkHeadingsBeforeOptions
+  extends Pick<BaseOptions, 'linkProperties' | 'content' | 'group'> {
   /**
-   * insert link before the heading
+   * Insert link before the heading
    */
   behavior: 'before'
 }
 
-interface RemarkAutolinkHeadingsAfterOptions extends Pick<BaseOptions, 'linkProperties' | 'content' | 'group'> {
+interface RemarkAutolinkHeadingsAfterOptions
+  extends Pick<BaseOptions, 'linkProperties' | 'content' | 'group'> {
   /**
-   * insert link after the heading
+   * Insert link after the heading
    */
   behavior: 'after'
 }
 
-interface RemarkAutolinkHeadingsWrapOptions extends Pick<BaseOptions, 'linkProperties'> {
+interface RemarkAutolinkHeadingsWrapOptions
+  extends Pick<BaseOptions, 'linkProperties'> {
   /**
-   * wrap the whole heading text with the link
+   * Wrap the whole heading text with the link
    */
   behavior: 'wrap'
 }
 
-interface RemarkAutolinkHeadingsPrependOptions extends Pick<BaseOptions, 'linkProperties' | 'content'> {
+interface RemarkAutolinkHeadingsPrependOptions
+  extends Pick<BaseOptions, 'linkProperties' | 'content'> {
   /**
-   * inject link before the heading text
+   * Inject link before the heading text
    */
   behavior: 'prepend'
 }
 
-interface RemarkAutolinkHeadingsAppendOptions extends Pick<BaseOptions, 'linkProperties' | 'content'> {
+interface RemarkAutolinkHeadingsAppendOptions
+  extends Pick<BaseOptions, 'linkProperties' | 'content'> {
   /**
-   * inject link after the heading text
+   * Inject link after the heading text
    */
   behavior: 'append'
 }
 
-type RemarkAutolinkHeadingsDefaultOptions  = Omit<RemarkAutolinkHeadingsPrependOptions, 'behavior'>
+type RemarkAutolinkHeadingsDefaultOptions = Omit<
+  RemarkAutolinkHeadingsPrependOptions,
+  'behavior'
+>
 
-type RemarkAutolinkHeadingsOptions = RemarkAutolinkHeadingsDefaultOptions | RemarkAutolinkHeadingsPrependOptions | RemarkAutolinkHeadingsAppendOptions | RemarkAutolinkHeadingsBeforeOptions | RemarkAutolinkHeadingsAfterOptions | RemarkAutolinkHeadingsWrapOptions
+type RemarkAutolinkHeadingsOptions =
+  | RemarkAutolinkHeadingsDefaultOptions
+  | RemarkAutolinkHeadingsPrependOptions
+  | RemarkAutolinkHeadingsAppendOptions
+  | RemarkAutolinkHeadingsBeforeOptions
+  | RemarkAutolinkHeadingsAfterOptions
+  | RemarkAutolinkHeadingsWrapOptions
 
 declare const remarkAutolinkHeadings: Plugin<[RemarkAutolinkHeadingsOptions?]>
 export default remarkAutolinkHeadings
