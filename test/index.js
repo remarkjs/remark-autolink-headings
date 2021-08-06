@@ -1,22 +1,22 @@
 import {readFileSync} from 'fs'
 import path from 'path'
 import test from 'tape'
-import remark from 'remark'
-import slug from 'remark-slug'
-import html from 'remark-html'
-import headings from '../index.js'
+import {remark} from 'remark'
+import remarkSlug from 'remark-slug'
+import remarkHtml from 'remark-html'
+import remarkAutolinkHeadings from '../index.js'
 
 const base = (file) =>
   readFileSync(path.join('test', 'fixtures', file), 'utf-8')
 const behaviors = ['append', 'prepend', 'after', 'before', 'wrap']
 
-test('remark-autolink-headings', (t) => {
+test('remarkAutolinkHeadings', (t) => {
   behaviors.forEach((b) => {
     t.is(
       remark()
-        .use(slug)
-        .use(html)
-        .use(headings, {behavior: b})
+        .use(remarkSlug)
+        .use(remarkHtml)
+        .use(remarkAutolinkHeadings, {behavior: b})
         .processSync(base('input.md'))
         .toString(),
       base('output.' + b + '.html'),
@@ -27,9 +27,9 @@ test('remark-autolink-headings', (t) => {
   behaviors.forEach((b) => {
     t.is(
       remark()
-        .use(slug)
-        .use(html)
-        .use(headings, {behaviour: b})
+        .use(remarkSlug)
+        .use(remarkHtml)
+        .use(remarkAutolinkHeadings, {behaviour: b})
         .processSync(base('input.md'))
         .toString(),
       base('output.' + b + '.html'),
@@ -39,9 +39,9 @@ test('remark-autolink-headings', (t) => {
 
   t.is(
     remark()
-      .use(slug)
-      .use(html)
-      .use(headings, {content: {type: 'text', value: '#'}})
+      .use(remarkSlug)
+      .use(remarkHtml)
+      .use(remarkAutolinkHeadings, {content: {type: 'text', value: '#'}})
       .processSync('# method')
       .toString(),
     '<h1 id="method"><a href="#method" aria-hidden="true" tabindex="-1">#</a>method</h1>\n',
@@ -50,9 +50,9 @@ test('remark-autolink-headings', (t) => {
 
   t.is(
     remark()
-      .use(slug)
-      .use(html)
-      .use(headings, {content: [{type: 'text', value: '#'}]})
+      .use(remarkSlug)
+      .use(remarkHtml)
+      .use(remarkAutolinkHeadings, {content: [{type: 'text', value: '#'}]})
       .processSync('# method')
       .toString(),
     '<h1 id="method"><a href="#method" aria-hidden="true" tabindex="-1">#</a>method</h1>\n',
@@ -61,9 +61,9 @@ test('remark-autolink-headings', (t) => {
 
   t.is(
     remark()
-      .use(slug)
-      .use(html)
-      .use(headings, {
+      .use(remarkSlug)
+      .use(remarkHtml)
+      .use(remarkAutolinkHeadings, {
         content(node) {
           return {
             type: 'text',
@@ -80,9 +80,9 @@ test('remark-autolink-headings', (t) => {
 
   t.is(
     remark()
-      .use(slug)
-      .use(html)
-      .use(headings, {linkProperties: {hidden: true}})
+      .use(remarkSlug)
+      .use(remarkHtml)
+      .use(remarkAutolinkHeadings, {linkProperties: {hidden: true}})
       .processSync('# method')
       .toString(),
     '<h1 id="method"><a href="#method" hidden><span class="icon icon-link"></span></a>method</h1>\n',
@@ -91,9 +91,9 @@ test('remark-autolink-headings', (t) => {
 
   t.is(
     remark()
-      .use(slug)
-      .use(html)
-      .use(headings, {
+      .use(remarkSlug)
+      .use(remarkHtml)
+      .use(remarkAutolinkHeadings, {
         group: {
           tagName: 'div',
           properties: {className: ['heading-group']}
@@ -108,9 +108,9 @@ test('remark-autolink-headings', (t) => {
 
   t.is(
     remark()
-      .use(slug)
-      .use(html)
-      .use(headings, {
+      .use(remarkSlug)
+      .use(remarkHtml)
+      .use(remarkAutolinkHeadings, {
         group(node) {
           return {
             tagName: 'div',
@@ -126,7 +126,11 @@ test('remark-autolink-headings', (t) => {
   )
 
   t.is(
-    remark().use(headings).use(html).processSync(base('input.md')).toString(),
+    remark()
+      .use(remarkAutolinkHeadings)
+      .use(remarkHtml)
+      .processSync(base('input.md'))
+      .toString(),
     base('output.html'),
     'should do nothing if slugs are not used'
   )
