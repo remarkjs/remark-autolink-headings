@@ -29,6 +29,9 @@ No change is needed: it works exactly the same now as it did before!
 
 ## Install
 
+This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c):
+Node 12+ is needed to use it and it must be `import`ed instead of `require`d.
+
 [npm][]:
 
 ```sh
@@ -47,22 +50,22 @@ Say we have the following markdown file, `example.md`:
 ##### elit
 ```
 
-And our script, `example.js`, looks as follows:
+And our module, `example.js`, looks as follows:
 
 ```js
-const fs = require('fs')
-const unified = require('unified')
-const markdown = require('remark-parse')
-const html = require('remark-html')
-const slug = require('remark-slug')
-const headings = require('remark-autolink-headings')
+import fs from 'node:fs'
+import {unified} from 'unified'
+import remarkParse from 'remark-parse'
+import remarkSlug from 'remark-slug'
+import remarkAutolinkHeadings from 'remark-autolink-headings'
+import remarkHtml from 'remark-html'
 
 const doc = unified()
-  .use(markdown)
-  .use(slug)
+  .use(remarkParse)
+  .use(remarkSlug)
   // Note that this module must be included after `remark-slug`.
-  .use(headings)
-  .use(html)
+  .use(remarkAutolinkHeadings)
+  .use(remarkHtml)
   .processSync(fs.readFileSync('example.md'))
   .toString()
 
@@ -81,7 +84,10 @@ Now, running `node example` yields:
 
 ## API
 
-### `remark().use(autolinkHeadings[, options])`
+This package exports no identifiers.
+The default export is `remarkAutolinkHeadings`.
+
+### `unified().use(remarkAutolinkHeadings[, options])`
 
 Automatically add links to headings.
 
