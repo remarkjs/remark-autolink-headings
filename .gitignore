@@ -4,6 +4,4 @@
 coverage/
 dist/
 node_modules/
-remark-autolink-headings.js
-remark-autolink-headings.min.js
 yarn.lock
