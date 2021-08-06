@@ -1,13 +1,13 @@
-const {readFileSync} = require('fs')
-const path = require('path')
-const test = require('tape')
-const remark = require('remark')
-const slug = require('remark-slug')
-const html = require('remark-html')
-const headings = require('../dist')
+import {readFileSync} from 'fs'
+import path from 'path'
+import test from 'tape'
+import remark from 'remark'
+import slug from 'remark-slug'
+import html from 'remark-html'
+import headings from '../index.js'
 
 const base = (file) =>
-  readFileSync(path.join(__dirname, 'fixtures', file), 'utf-8')
+  readFileSync(path.join('test', 'fixtures', file), 'utf-8')
 const behaviors = ['append', 'prepend', 'after', 'before', 'wrap']
 
 test('remark-autolink-headings', (t) => {
