@@ -46,25 +46,24 @@
     "@babel/register": "^7.0.0",
     "ava": "3.0.0",
     "babel-plugin-add-module-exports": "^1.0.0",
-    "dtslint": "^4.0.0",
+    "c8": "^7.0.0",
     "hastscript": "^7.0.0",
-    "nyc": "^15.0.0",
     "prettier": "^2.0.0",
     "remark": "^13.0.0",
     "remark-cli": "^9.0.0",
     "remark-html": "^13.0.0",
     "remark-preset-wooorm": "^8.0.0",
     "remark-slug": "^6.0.0",
+    "tape": "^5.3.0",
     "xo": "^0.34.0"
   },
   "scripts": {
     "prepublishOnly": "npm run compile",
     "format": "remark . -qfo && prettier . -w --loglevel warn && xo --fix",
     "compile": "babel src --out-dir dist --ignore src/**/__tests__",
-    "test-api": "ava",
-    "test-coverage": "nyc --reporter lcov ava",
-    "test-types": "dtslint types",
-    "test": "npm run compile && npm run format && npm run test-coverage && npm run test-types"
+    "test-api": "node --conditions development test/index.js",
+    "test-coverage": "c8 --check-coverage --branches 100 --functions 100 --lines 100 --statements 100 --reporter lcov npm run test-api",
+    "test": "npm run compile && npm run format && npm run test-coverage"
   },
   "browserslist": "> 2.5%, node 6",
   "babel": {
