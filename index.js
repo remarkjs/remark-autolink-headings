@@ -1,4 +1,4 @@
-import visit from 'unist-util-visit'
+import {visit, SKIP} from 'unist-util-visit'
 import extend from 'extend'
 
 const behaviors = {prepend: 'unshift', append: 'push'}
@@ -84,7 +84,7 @@ export default function attacher(options = {}) {
 
     splice.apply(parent.children, [index, 1].concat(nodes))
 
-    return [visit.SKIP, index + nodes.length]
+    return [SKIP, index + nodes.length]
   }
 
   function wrap(node, url) {
