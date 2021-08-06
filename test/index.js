@@ -11,7 +11,9 @@ const base = (file) =>
 const behaviors = ['append', 'prepend', 'after', 'before', 'wrap']
 
 test('remarkAutolinkHeadings', (t) => {
-  behaviors.forEach((b) => {
+  let index = -1
+  while (++index < behaviors.length) {
+    const b = behaviors[index]
     t.is(
       remark()
         .use(remarkSlug)
@@ -22,9 +24,7 @@ test('remarkAutolinkHeadings', (t) => {
       base('output.' + b + '.html'),
       'should autolink headings (' + b + ')'
     )
-  })
 
-  behaviors.forEach((b) => {
     t.is(
       remark()
         .use(remarkSlug)
@@ -35,7 +35,7 @@ test('remarkAutolinkHeadings', (t) => {
       base('output.' + b + '.html'),
       'should autolink headings with deprecated option (' + b + ')'
     )
-  })
+  }
 
   t.is(
     remark()

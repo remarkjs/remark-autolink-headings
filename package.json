@@ -47,7 +47,7 @@
     "remark-preset-wooorm": "^8.0.0",
     "remark-slug": "^7.0.0",
     "tape": "^5.3.0",
-    "xo": "^0.34.0"
+    "xo": "^0.39.0"
   },
   "scripts": {
     "format": "remark . -qfo && prettier . -w --loglevel warn && xo --fix",
