@@ -24,17 +24,6 @@ test('remarkAutolinkHeadings', (t) => {
       base('output.' + b + '.html'),
       'should autolink headings (' + b + ')'
     )
-
-    t.is(
-      remark()
-        .use(remarkSlug)
-        .use(remarkHtml)
-        .use(remarkAutolinkHeadings, {behaviour: b})
-        .processSync(base('input.md'))
-        .toString(),
-      base('output.' + b + '.html'),
-      'should autolink headings with deprecated option (' + b + ')'
-    )
   }
 
   t.is(
@@ -98,7 +87,7 @@ test('remarkAutolinkHeadings', (t) => {
           tagName: 'div',
           properties: {className: ['heading-group']}
         },
-        behaviour: 'before'
+        behavior: 'before'
       })
       .processSync('# method')
       .toString(),
@@ -117,7 +106,7 @@ test('remarkAutolinkHeadings', (t) => {
             properties: {className: ['heading-' + node.depth + '-group']}
           }
         },
-        behaviour: 'after'
+        behavior: 'after'
       })
       .processSync('# method')
       .toString(),

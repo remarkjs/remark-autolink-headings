@@ -14,23 +14,9 @@ const defaults = {behavior: 'prepend', content: contentDefaults}
 
 const splice = [].splice
 
-let deprecationWarningIssued = false
-
 export default function attacher(options = {}) {
   let {linkProperties, behavior, content, group} = {...defaults, ...options}
   let method
-
-  // NOTE: Remove in next major version
-  if (options.behaviour !== undefined) {
-    if (!deprecationWarningIssued) {
-      deprecationWarningIssued = true
-      console.warn(
-        '[remark-autolink-headings] Deprecation Warning: `behaviour` is a nonstandard option. Use `behavior` instead.'
-      )
-    }
-
-    behavior = options.behaviour
-  }
 
   if (behavior === 'wrap') {
     method = wrap
