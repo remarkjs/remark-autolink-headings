@@ -1,4 +1,5 @@
-import {readFileSync} from 'fs'
+import assert from 'assert'
+import fs from 'fs'
 import path from 'path'
 import test from 'tape'
 import {remark} from 'remark'
@@ -6,8 +7,14 @@ import remarkSlug from 'remark-slug'
 import remarkHtml from 'remark-html'
 import remarkAutolinkHeadings from '../index.js'
 
-const base = (file) =>
-  readFileSync(path.join('test', 'fixtures', file), 'utf-8')
+/**
+ * @param {string} name
+ */
+const base = function (name) {
+  return fs.readFileSync(path.join('test', 'fixtures', name), 'utf-8')
+}
+
+/** @type {['append', 'prepend', 'after', 'before', 'wrap']} */
 const behaviors = ['append', 'prepend', 'after', 'before', 'wrap']
 
 test('remarkAutolinkHeadings', (t) => {
@@ -54,9 +61,11 @@ test('remarkAutolinkHeadings', (t) => {
       .use(remarkHtml)
       .use(remarkAutolinkHeadings, {
         content(node) {
+          const head = node.children[0]
+          assert(head.type === 'text')
           return {
             type: 'text',
-            value: 'Read the “' + node.children[0].value + '” section'
+            value: 'Read the “' + head.value + '” section'
           }
         },
         linkProperties: {}
@@ -84,8 +93,10 @@ test('remarkAutolinkHeadings', (t) => {
       .use(remarkHtml)
       .use(remarkAutolinkHeadings, {
         group: {
+          type: 'element',
           tagName: 'div',
-          properties: {className: ['heading-group']}
+          properties: {className: ['heading-group']},
+          children: []
         },
         behavior: 'before'
       })
@@ -102,8 +113,10 @@ test('remarkAutolinkHeadings', (t) => {
       .use(remarkAutolinkHeadings, {
         group(node) {
           return {
+            type: 'element',
             tagName: 'div',
-            properties: {className: ['heading-' + node.depth + '-group']}
+            properties: {className: ['heading-' + node.depth + '-group']},
+            children: []
           }
         },
         behavior: 'after'
@@ -122,6 +135,36 @@ test('remarkAutolinkHeadings', (t) => {
       .toString(),
     base('output.html'),
     'should do nothing if slugs are not used'
+  )
+
+  t.throws(
+    () => {
+      remark()
+        .use(remarkSlug)
+        .use(remarkHtml)
+        // @ts-expect-error: invalid group.
+        .use(remarkAutolinkHeadings, {
+          group() {
+            return {type: 'text', value: 'x'}
+          },
+          behavior: 'after'
+        })
+        .processSync('# method')
+        .toString()
+    },
+    /Expected element as grouping/,
+    'should throw when `group` is not an element'
+  )
+
+  t.is(
+    remark()
+      .use(remarkSlug)
+      .use(remarkAutolinkHeadings, {behavior: 'wrap'})
+      .use(remarkHtml)
+      .processSync('# [Hello](#), **world**!')
+      .toString(),
+    '<h1 id="hello-world"><a href="#hello-world">Hello, <strong>world</strong>!</a></h1>\n',
+    'should unravel interactive content when wrapping'
   )
 
   t.end()
