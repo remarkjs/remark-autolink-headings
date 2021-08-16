@@ -1,19 +1,9 @@
 {
   "name": "remark-autolink-headings",
   "version": "7.0.0",
-  "description": "remark plugin to automatically add links to headings",
+  "description": "Legacy remark plugin to automatically add links to headings — please use `rehype-autolink-headings` instead",
   "license": "MIT",
-  "keywords": [
-    "unified",
-    "remark",
-    "remark-plugin",
-    "plugin",
-    "mdast",
-    "markdown",
-    "headings",
-    "link",
-    "automatic"
-  ],
+  "keywords": [],
   "repository": "remarkjs/remark-autolink-headings",
   "bugs": "https://github.com/remarkjs/remark-autolink-headings/issues",
   "funding": {
@@ -41,7 +31,7 @@
     "unist-util-visit": "^4.0.0"
   },
   "devDependencies": {
-    "@types/extend": "^3.0.1",
+    "@types/extend": "^3.0.0",
     "@types/tape": "^4.0.0",
     "c8": "^7.0.0",
     "hastscript": "^7.0.0",
